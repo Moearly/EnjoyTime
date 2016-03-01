@@ -23,6 +23,11 @@ import java.util.Random;
  * @version V1.0
  */
 public class AppUtils {
+    /**
+     * bmob--Application ID
+     */
+    public static String APPLICATION_ID="921464a0f919613e741e1981e187bce3";
+
     public static SuperToast.Animations TOAST_ANIMATION = SuperToast.Animations.FLYIN;
 
     public static RelativeSizeSpan relativeSizeSpan;

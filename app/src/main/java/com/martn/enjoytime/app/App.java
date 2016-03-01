@@ -1,6 +1,7 @@
 package com.martn.enjoytime.app;
 
 import android.content.Context;
+import android.provider.Settings;
 
 import com.martn.enjoytime.base.BaseApplication;
 import com.squareup.leakcanary.LeakCanary;
@@ -44,6 +45,11 @@ public class App extends BaseApplication {
 
         App application = (App) context.getApplicationContext();
         return application.mRefWatcher;
+    }
+
+    public static String getAndroidId() {
+        return Settings.Secure.getString(
+                context().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     /**

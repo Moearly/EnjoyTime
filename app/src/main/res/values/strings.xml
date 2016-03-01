@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EnjoyTime</string>
+    <string name="tip_double_click_exit">再按一下就要退出app了</string>
+    <string name="app_splash_name">Time V0.0.1</string>
+    <string name="loading">Loading...</string>
+    <string name="loaded">加载完成</string>
 </resources>
