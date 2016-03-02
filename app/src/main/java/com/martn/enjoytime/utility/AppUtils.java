@@ -28,6 +28,11 @@ public class AppUtils {
      */
     public static String APPLICATION_ID="921464a0f919613e741e1981e187bce3";
 
+
+    /**
+     * bugly--id
+     */
+    public static String BUGLY_APP_ID = "900021188";//9eqAoa7XdDDEXrrJ
     public static SuperToast.Animations TOAST_ANIMATION = SuperToast.Animations.FLYIN;
 
     public static RelativeSizeSpan relativeSizeSpan;

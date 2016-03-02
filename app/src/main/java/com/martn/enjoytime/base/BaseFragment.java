@@ -56,14 +56,14 @@ public class BaseFragment extends Fragment {
     }
 
 
-    public void showLoading() {
-        if ((activity != null) && ((activity instanceof BaseActivity)))
-            ((BaseActivity) activity).showLoading();
-    }
+//    public void showLoading() {
+//        if ((activity != null) && ((activity instanceof BaseActivity)))
+//            ((BaseActivity) activity).showLoading();
+//    }
 
-    public void dismissLoading() {
-        if ((activity != null) && ((activity instanceof BaseActivity)))
-            ((BaseActivity) activity).dismissLoading();
-    }
+//    public void dismissLoading() {
+//        if ((activity != null) && ((activity instanceof BaseActivity)))
+//            ((BaseActivity) activity).dismissLoading();
+//    }
 
 }
