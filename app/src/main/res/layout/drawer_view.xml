@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/left_drawer"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="165dp">
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="165dp" />
+        <RelativeLayout
+            android:background="@color/theme_main_color"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/user_head"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/default_user_logo"
+                app:civ_border_color="#ffffff"
+                app:civ_border_width="0dp" />
+            <TextView
+                android:layout_below="@+id/user_head"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/user_name"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Cecilia"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </FrameLayout>
+    <ScrollView
+        android:id="@+id/drawer_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <com.martn.enjoytime.view.DrawerRow
+                android:id="@+id/drawer_home"
+                app:drawer_icon="@drawable/slide_home_default"
+                app:drawer_icon_selected="@drawable/slide_home_slected"
+                app:drawer_title="@string/drawer_home"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+            <com.martn.enjoytime.view.DrawerRow
+                android:id="@+id/drawer_everyday"
+                app:drawer_icon="@drawable/slide_every_default"
+                app:drawer_icon_selected="@drawable/slide_every_slected"
+                app:drawer_title="@string/drawer_everyday"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+            <com.martn.enjoytime.view.DrawerRow
+                android:id="@+id/drawer_statistics"
+                app:drawer_icon_selected="@drawable/slide_calendar_slected"
+                app:drawer_icon="@drawable/slide_calendar_default"
+                app:drawer_title="@string/statistics"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+            <com.martn.enjoytime.view.DrawerRow
+                app:drawer_icon_selected="@drawable/slide_target_slected"
+                android:id="@+id/drawer_man_goal"
+                app:drawer_icon="@drawable/slide_target_default"
+                app:drawer_title="@string/man_goal"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+
+            <com.martn.enjoytime.view.DrawerRow
+                android:id="@+id/drawer_view_log"
+                app:drawer_icon="@drawable/slide_lists_default"
+                app:drawer_icon_selected="@drawable/slide_lists_slected"
+                app:drawer_title="@string/view_log"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+            <com.martn.enjoytime.view.DrawerRow
+                app:drawer_icon_selected="@drawable/slide_me_slected"
+                android:id="@+id/drawer_my"
+                app:drawer_icon="@drawable/slide_me_default"
+                app:drawer_title="@string/my"
+                app:drawer_selected_color="@color/theme_main_color"
+                app:drawer_group="header"
+                style="@style/DrawerRow" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

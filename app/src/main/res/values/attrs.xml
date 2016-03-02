@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DrawerRow">
+        <attr name="drawer_background_color" format="reference|color" />
+        <attr name="drawer_background_selected_color" format="reference|color" />
+        <attr name="drawer_group" format="reference|string" />
+        <attr name="drawer_icon_selected" format="reference" />
+        <attr name="drawer_icon" format="reference" />
+        <attr name="drawer_ripple_color" format="reference|color" />
+        <attr name="drawer_selected_color" format="reference|color" />
+        <attr name="drawer_title" format="reference|string" />
+        <attr name="drawer_title_color" format="reference|color" />
+    </declare-styleable>
+</resources>

@@ -47,4 +47,20 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
+    <style name="Toolbar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/theme_main_color</item>
+    </style>
+
+    <style name="DrawerRow">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50.0dip</item>
+        <item name="drawer_title_color">@color/white</item>
+        <item name="drawer_background_selected_color">#b2ffffff</item>
+        <item name="drawer_background_color">#00000000</item>
+    </style>
+
 </resources>

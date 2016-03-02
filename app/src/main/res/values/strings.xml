@@ -4,4 +4,10 @@
     <string name="app_splash_name">Time V0.0.1</string>
     <string name="loading">Loading...</string>
     <string name="loaded">加载完成</string>
+    <string name="drawer_home">首页</string>
+    <string name="drawer_everyday">每天</string>
+    <string name="statistics">统计</string>
+    <string name="man_goal">管理目标</string>
+    <string name="view_log">查看记录</string>
+    <string name="my">我的</string>
 </resources>
