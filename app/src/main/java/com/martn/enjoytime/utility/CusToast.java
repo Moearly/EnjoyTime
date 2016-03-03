@@ -3,6 +3,7 @@ package com.martn.enjoytime.utility;
 import android.graphics.Color;
 
 import com.github.johnpersano.supertoasts.SuperToast;
+import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseApplication;
 
 /**
@@ -16,28 +17,27 @@ import com.martn.enjoytime.base.BaseApplication;
  */
 public class CusToast {
     private static CusToast ourInstance = new CusToast();
-
-    public static CusToast getInstance() {
-        return ourInstance;
-    }
-
     private CusToast() {
     }
 
-    public void showToast(int text, int color) {
-        SuperToast.cancelAllSuperToasts();
-        SuperToast superToast = new SuperToast(BaseApplication.context());
-        superToast.setAnimations(AppUtils.TOAST_ANIMATION);
-        superToast.setDuration(SuperToast.Duration.SHORT);
-        superToast.setTextColor(Color.parseColor("#ffffff"));
-        superToast.setTextSize(SuperToast.TextSize.SMALL);
-        superToast.setText(BaseApplication.resources().getString(text));
-        superToast.setBackground(color);
-        superToast.getTextView().setTypeface(AppUtils.typefaceLatoLight);
-        superToast.show();
+    /**
+     *
+     * @param text
+     * @param color 背景颜色
+     */
+    public static void showToast(int text, int color) {
+        showToast(BaseApplication.resources().getString(text),color);
     }
 
-    public void showToast(String text, int color) {
+    public static void showToast(int text) {
+        showToast(text,R.color.default_toast_color);//默认使用系统主题颜色
+    }
+
+    public static void showToast(String text) {
+        showToast(text,R.color.default_toast_color);//默认使用系统主题颜色
+    }
+
+    public static void showToast(String text, int color) {
         SuperToast.cancelAllSuperToasts();
         SuperToast superToast = new SuperToast(BaseApplication.context());
         superToast.setAnimations(AppUtils.TOAST_ANIMATION);
@@ -49,4 +49,6 @@ public class CusToast {
         superToast.getTextView().setTypeface(AppUtils.typefaceLatoLight);
         superToast.show();
     }
+
+
 }

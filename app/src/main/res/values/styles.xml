@@ -60,7 +60,7 @@
         <item name="android:layout_height">50.0dip</item>
         <item name="drawer_title_color">@color/white</item>
         <item name="drawer_background_selected_color">#b2ffffff</item>
-        <item name="drawer_background_color">#00000000</item>
+        <item name="drawer_background_color">@color/theme_main_color</item>
     </style>
 
 </resources>

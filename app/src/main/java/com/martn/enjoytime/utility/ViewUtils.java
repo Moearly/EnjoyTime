@@ -25,4 +25,19 @@ public class ViewUtils {
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return px;
     }
+
+    /**
+     * 获取状态栏的高度
+     * @return
+     */
+    public static int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = BaseApplication.context()
+                .getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = BaseApplication.context()
+                    .getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }

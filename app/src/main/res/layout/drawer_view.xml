@@ -5,7 +5,7 @@
     android:layout_width="240dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@android:color/white"
+    android:background="@color/theme_main_color"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -54,7 +54,6 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-
             <com.martn.enjoytime.view.DrawerRow
                 android:id="@+id/drawer_home"
                 app:drawer_icon="@drawable/slide_home_default"

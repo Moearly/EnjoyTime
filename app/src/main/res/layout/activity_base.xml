@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/root_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <View
+        android:id="@+id/status_bar_view"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/theme_main_color"
+        />
+    <include layout="@layout/toolbar_layout" />
+</LinearLayout>

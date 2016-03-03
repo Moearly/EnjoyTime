@@ -44,24 +44,25 @@ public class DrawerRow extends MaterialRippleLayout {
 
     private String group;
     public DrawerRow(Context context) {
-        super(context,null);
+        this(context,null);
     }
 
     public DrawerRow(Context context, AttributeSet attrs) {
-        super(context, attrs,0);
+        this(context, attrs,0);
     }
 
     public DrawerRow(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         clicks = new ArrayList<>();
-        View rootView = ((LayoutInflater)context.getSystemService("layout_inflater")).inflate(R.layout.drawer_row, this, true);
-        icon = (ImageView) rootView.findViewById(R.id.drawer_row_icon);
-        title = (TextView) rootView.findViewById(R.id.drawer_row_text);
+        ((LayoutInflater)context.getSystemService("layout_inflater")).inflate(R.layout.drawer_row, this, true);
+        icon = (ImageView) findViewById(R.id.drawer_row_icon);
+        title = (TextView) findViewById(R.id.drawer_row_text);
 
 
         TypedArray ar = context.obtainStyledAttributes(attrs, R.styleable.DrawerRow, 0, 0);
         drawer_background_color = ar.getColor(R.styleable.DrawerRow_drawer_background_color,R.color.gray);
         drawer_background_selected_color = ar.getColor(R.styleable.DrawerRow_drawer_background_selected_color,R.color.gray);
+
         drawer_ripple_color = ar.getColor(R.styleable.DrawerRow_drawer_ripple_color,R.color.gray);
 
         currentIcon = ar.getResourceId(R.styleable.DrawerRow_drawer_icon,0);
@@ -92,6 +93,8 @@ public class DrawerRow extends MaterialRippleLayout {
                 setSelected();
             }
         });
+
+        setUnselected();
     }
 
     public void unselectAll() {
@@ -123,7 +126,6 @@ public class DrawerRow extends MaterialRippleLayout {
 
 
     public void addClick(View.OnClickListener listener) {
-
         clicks.add(listener);
     }
 }

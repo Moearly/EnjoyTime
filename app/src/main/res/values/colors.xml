@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="statusBarColor">@color/theme_main_color</color>
+
     <color name="theme_main_color">#50d2d2</color>
     <color name="background_color">#fff4f4f4</color>
 
@@ -13,5 +15,6 @@
     <color name="white">#ffffff</color>
     <color name="drawerArrowColor">@color/white</color>
     <color name="gray">#ffc0c0c0</color>
+    <color name="default_toast_color">#bb000000</color>
 
 </resources>

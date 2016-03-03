@@ -1,19 +1,23 @@
 package com.martn.enjoytime.base;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.martn.enjoytime.MainActivity;
 import com.martn.enjoytime.R;
+import com.martn.enjoytime.utility.ViewUtils;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -41,7 +45,7 @@ public class BaseActivity extends AppCompatActivity {
      */
     private void initToolbar() {
 
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,16 +62,34 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //super.setContentView(R.layout.activity_base);
+        super.setContentView(R.layout.activity_base);
         //bug监听上传
 //        AppManager.getAppManager().addActivity(this);
         ctx = this;
         activity = this;
-        //理解这段代码作用
-        if (Build.VERSION.SDK_INT >= 19) {
-            WindowManager.LayoutParams attributes = getWindow().getAttributes();
-            attributes.flags = (0x4000000 | attributes.flags);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setStatusBar();
+        } else {
+            // do something for phones running an SDK before lollipop
+            View statusBarView = (View)findViewById(R.id.status_bar_view);
+            statusBarView.getLayoutParams().height = ViewUtils.getStatusBarHeight();
         }
+
+//        //理解这段代码作用
+//        if (Build.VERSION.SDK_INT >= 19) {
+//            WindowManager.LayoutParams attributes = getWindow().getAttributes();
+//            attributes.flags = (0x4000000 | attributes.flags);
+//        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setStatusBar() {
+        // Do something for lollipop and above versions
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(ctx, R.color.statusBarColor));
+
     }
 
     @Override
