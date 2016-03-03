@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,10 +29,17 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.martn.enjoytime.base.BaseActivity;
 import com.martn.enjoytime.base.BaseFragment;
+import com.martn.enjoytime.ui.fragment.CountInfoFragment;
+import com.martn.enjoytime.ui.fragment.EveryDayFragment;
+import com.martn.enjoytime.ui.fragment.HomeFragment;
+import com.martn.enjoytime.ui.fragment.ManageTargetFragment;
+import com.martn.enjoytime.ui.fragment.UserCenterFragment;
+import com.martn.enjoytime.ui.fragment.ViewLogFragment;
 import com.martn.enjoytime.utility.CusToast;
 import com.martn.enjoytime.utility.ViewUtils;
 import com.martn.enjoytime.view.DrawerRow;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import butterknife.Bind;
@@ -76,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private BaseFragment currentFragment;
     private boolean isDrawerOpen = false;
+    private ArrayList<String> tags;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,9 +126,21 @@ public class MainActivity extends AppCompatActivity {
         dlRoot.setDrawerListener(mDrawerToggle);
 
         //初始化---homeMeun的组件
-        drawerHome.addClick(new MeunOnclick("home", "hha"));
+        tags = new ArrayList<>();
+        drawerHome.addClick(new MeunOnclick(1, HomeFragment.getMyTag()));
+        drawerEveryday.addClick(new MeunOnclick(2, EveryDayFragment.getMyTag()));
+        drawerStatistics.addClick(new MeunOnclick(3, CountInfoFragment.getMyTag()));
+        drawerManGoal.addClick(new MeunOnclick(4, ManageTargetFragment.getMyTag()));
+        drawerViewLog.addClick(new MeunOnclick(5, ViewLogFragment.getMyTag()));
+        drawerMy.addClick(new MeunOnclick(6, UserCenterFragment.getMyTag()));
         drawerHome.setSelected();
+
+        //填充数据
+        contentInit(new HomeFragment(), HomeFragment.getMyTag());
+
     }
+
+
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setStatusBar() {
@@ -140,27 +163,115 @@ public class MainActivity extends AppCompatActivity {
      */
     class MeunOnclick implements View.OnClickListener {
 
-        private String fragmentName;
-        private String title;
-        private int d;
+        private int index;
+        private String tag;
 
-        MeunOnclick(String title, String fragmentName) {
-            this.title = title;
-            this.fragmentName = fragmentName;
+        public MeunOnclick(int index, String tag) {
+            this.index = index;
+            this.tag = tag;
+            tags.add(tag);
         }
 
         public void onClick(View view) {
-            CusToast.showToast("点击了m" + title);
-//            MainActivity.b localb = MainActivity.this.p;
-//            String str1 = this.c;
-//            String str2 = this.b;
-//            int i = this.d;
-//            localb.a(str1, str2, i);
-//            MainActivity.a(MainActivity.this, 0);
+            switchFragment(index,tag);
         }
     }
 
 
+
+    /**
+     * 展示类容
+     */
+    public void showContent() {
+        if ((dlRoot != null) && (dlRoot.isDrawerOpen(Gravity.LEFT)))
+            dlRoot.closeDrawer(Gravity.LEFT);
+    }
+
+    /**
+     * 初始化
+     * @param fragment
+     * @param tag
+     */
+    public void contentInit(Fragment fragment, String tag) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment, tag);
+        fragmentTransaction.addToBackStack(tag);
+        fragmentTransaction.commit();
+    }
+
+    /**
+     * 处理fragment切换会带来的其他逻辑
+     * @param index
+     */
+    private void switchFragment(int index, String tag) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        switch (index) {
+            case 1:
+                if (fragment == null) {
+                    fragment = new HomeFragment();
+                }
+                break;
+            case 2:
+                if (fragment == null) {
+                    fragment = new EveryDayFragment();
+                }
+                break;
+            case 3:
+                if (fragment == null) {
+                    fragment = new CountInfoFragment();
+                }
+                break;
+            case 4:
+                if (fragment == null) {
+                    fragment = new ManageTargetFragment();
+                }
+                break;
+            case 5:
+                if (fragment == null) {
+                    fragment = new ViewLogFragment();
+                }
+                break;
+            case 6:
+                if (fragment == null) {
+                    fragment = new UserCenterFragment();
+                }
+                break;
+            default:
+                if (fragment == null) {
+                    fragment = new HomeFragment();
+                }
+        }
+        switchFragment(fragment,tag);
+    }
+
+    private void switchFragment(final Fragment fragment, final String tag) {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showContent();
+            }
+        }, 120L);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, tag);
+                fragmentTransaction.addToBackStack(tag);
+                for (int i = 0; i < tags.size(); i++) {
+                    String curTag = tags.get(i);
+                    Fragment curFragment = getSupportFragmentManager().findFragmentByTag(curTag);
+                    if (curFragment != null) {
+                        if (!tag.equals(curTag)) {
+                            fragmentTransaction.hide(curFragment);
+                        }
+                    }
+                }
+                fragmentTransaction.show(fragment);
+                fragmentTransaction.commit();
+            }
+        }, 50L);
+    }
 
     class HomeActionBarToggle  extends ActionBarDrawerToggle{
         private String fragmentName;
@@ -180,41 +291,7 @@ public class MainActivity extends AppCompatActivity {
             super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
         }
 
-        private void switchFragment(String title) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            currentFragment = fragmentManager.findFragmentByTag(title);
 
-            if(currentFragment == null) {
-                currentFragment = ContentFragment.newInstance(title);
-                ft.add(R.id.container, currentFragment, title);
-            }
-            if(lastFragment != null) {
-                ft.hide(lastFragment);
-            }
-            if(currentFragment.isDetached()){
-                ft.attach(currentFragment);
-            }
-            ft.show(currentFragment);
-            lastFragment = currentFragment;
-            ft.commit();
-            onSectionAttached(title);
-
-            Iterator iterator = mFragments.iterator();
-            while (iterator.hasNext()) {
-                BaseFragment fragment = (BaseFragment) iterator.next();
-                if (fragment == baseFragment) {
-                    if (!baseFragment.isAdded()) {
-                        fragmentTransaction.add(R.id.fragment_container, baseFragment);
-                        baseFragment.loadFirst();
-                    }
-                    fragmentTransaction.show(baseFragment);
-                } else if (fragment.isAdded()) {
-                    fragmentTransaction.hide(fragment);
-                }
-            }
-            fragmentTransaction.commitAllowingStateLoss();
-        }
 
         @Override
         public void onDrawerClosed(View drawerView) {

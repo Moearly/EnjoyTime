@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.martn.enjoytime.app.App;
 import com.squareup.leakcanary.RefWatcher;
@@ -21,6 +22,16 @@ import java.lang.reflect.Field;
  */
 public class BaseFragment extends Fragment {
     protected Activity activity;
+
+
+    public View findViewById(int res) {
+        return getActivity().findViewById(res);
+    }
+
+
+    public static String getMyTag() {
+        return "base";
+    }
 
     public void loadFirst() {
     }
