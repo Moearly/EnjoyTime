@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseFragment;
 
 /**
@@ -27,8 +28,6 @@ public class HomeFragment extends BaseFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(activity);
-        textView.setText("home");
-        return textView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

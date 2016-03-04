@@ -111,20 +111,20 @@ public class MainActivity extends AppCompatActivity {
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-
-            final ActionBar actionBar = getSupportActionBar();
+            ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
+                // 打開 up button
                 actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setDisplayShowTitleEnabled(true);
-                actionBar.setDisplayUseLogoEnabled(false);
+                //actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setDisplayShowTitleEnabled(false);
+//                actionBar.setDisplayUseLogoEnabled(false);
                 actionBar.setHomeButtonEnabled(true);
             }
         }
 
         mDrawerToggle = new HomeActionBarToggle(this, dlRoot, 0, 0);
+        mDrawerToggle.syncState();
         dlRoot.setDrawerListener(mDrawerToggle);
-
         //初始化---homeMeun的组件
         tags = new ArrayList<>();
         drawerHome.addClick(new MeunOnclick(1, HomeFragment.getMyTag()));
@@ -297,13 +297,7 @@ public class MainActivity extends AppCompatActivity {
         public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
             isDrawerOpen = false;
-            if (fragmentName != null) {
-                //设置title---改变文字
-                if (title != null) {
-                    tvTitle.setText(title);
-                }
 
-            }
         }
 
         @Override
