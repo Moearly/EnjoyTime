@@ -2,6 +2,7 @@ package com.martn.enjoytime.view.WaveView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -23,9 +24,9 @@ public class WaveView extends LinearLayout {
     protected static final int LARGE = 1;
     protected static final int LITTLE = 3;
     protected static final int MIDDLE = 2;
-    private final int BASE_PROGRESS;
-    private final int DEFAULT_ABOVE_WAVE_COLOR;
-    private final int DEFAULT_BLOW_WAVE_COLOR;
+    private final int BASE_PROGRESS = 10 ;
+    private final int DEFAULT_ABOVE_WAVE_COLOR = Color.WHITE;
+    private final int DEFAULT_BLOW_WAVE_COLOR = Color.WHITE;
     private int mAboveWaveColor;
     private int mBlowWaveColor;
     private int mProgress;
@@ -37,7 +38,6 @@ public class WaveView extends LinearLayout {
     private int mWaveToTop;
 
     private static class SavedState extends BaseSavedState {
-        public static final Creator<SavedState> CREATOR;
         int progress;
 
         SavedState(Parcelable superState) {
@@ -54,29 +54,24 @@ public class WaveView extends LinearLayout {
             out.writeInt(progress);
         }
 
-        static {
-            CREATOR = new Creator<SavedState>() {
-                public SavedState createFromParcel(Parcel in) {
-                    return new SavedState(in);
-                }
+        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
 
-                public SavedState[] newArray(int size) {
-                    return new SavedState[size];
-                }
-            };
-        }
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 
     public WaveView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        DEFAULT_ABOVE_WAVE_COLOR = -1;
-        DEFAULT_BLOW_WAVE_COLOR = -1;
-        BASE_PROGRESS = 10;
         setOrientation(LARGE);
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.WaveView, R.attr.waveViewStyle, 0);
-        mAboveWaveColor = attributes.getColor(R.styleable.WaveView_above_wave_color, -1);
-        mBlowWaveColor = attributes.getColor(R.styleable.WaveView_blow_wave_color, -1);
-        mProgress = attributes.getInt(R.styleable.WaveView_progress, 0);
+        mAboveWaveColor = attributes.getColor(R.styleable.WaveView_above_wave_color, DEFAULT_ABOVE_WAVE_COLOR);
+        mBlowWaveColor = attributes.getColor(R.styleable.WaveView_blow_wave_color, DEFAULT_BLOW_WAVE_COLOR);
+        mProgress = attributes.getInt(R.styleable.WaveView_progress, BASE_PROGRESS);
         mWaveHeight = attributes.getInt(R.styleable.WaveView_wave_height, MIDDLE);
         mWaveMultiple = attributes.getInt(R.styleable.WaveView_wave_length, LARGE);
         mWaveHz = attributes.getInt(R.styleable.WaveView_wave_hz, MIDDLE);
@@ -118,11 +113,11 @@ public class WaveView extends LinearLayout {
     }
 
     private void computeWaveToTop() {
-        mWaveToTop = (int) (((float) getHeight()) * (1f - (((float) mProgress) / 100.0f)));
-        if (mWave != null) {
+        mWaveToTop = (int) (getHeight() * (1f - mProgress / 100f));
+        if (this.mWave != null) {
             ViewGroup.LayoutParams params = mWave.getLayoutParams();
             if (params != null) {
-                ((LinearLayout.LayoutParams) params).topMargin = mWaveToTop;
+                ((LayoutParams) params).topMargin = mWaveToTop;
             }
             mWave.setLayoutParams(params);
         }

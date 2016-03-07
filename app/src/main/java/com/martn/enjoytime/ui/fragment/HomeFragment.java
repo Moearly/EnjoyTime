@@ -3,6 +3,7 @@ package com.martn.enjoytime.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager;
+import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseFragment;
 
@@ -44,6 +47,9 @@ public class HomeFragment extends BaseFragment {
     RecyclerView recyclerView;
     @Bind(R.id.sl_refresh)
     SwipeRefreshLayout slRefresh;
+    private LinearLayoutManager layoutManager;
+    private RecyclerViewTouchActionGuardManager recyclerViewTouchActionGuardManager;
+    private RecyclerViewSwipeManager recyclerViewSwipeManager;
 
     public static String getMyTag() {
         return "home";
@@ -61,5 +67,29 @@ public class HomeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+    }
+
+    private void init() {
+        initView();
+
+
+    }
+
+    private void initView() {
+        layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
+        recyclerViewTouchActionGuardManager = new RecyclerViewTouchActionGuardManager();
+        recyclerViewTouchActionGuardManager.
+                setInterceptVerticalScrollingWhileAnimationRunning(true);
+        recyclerViewTouchActionGuardManager.setEnabled(true);
+
+        recyclerViewSwipeManager = new RecyclerViewSwipeManager();
+
+        mAdapter = new MySwipeableItemAdapter(mContext, RecordManager.SELECTED_RECORDS, this, this);
     }
 }

@@ -82,4 +82,10 @@ dependencies {
 
     //图片的放大与相关工具处理
     compile 'com.commit451:PhotoView:1.2.4'
+
+    dependencies {
+        compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.8.6@aar'){
+            transitive=true
+        }
+    }
 }

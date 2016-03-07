@@ -86,8 +86,8 @@ public class MainActivity extends FloatingButtonBaseActivity {
     LinearLayout leftDrawer;
     @Bind(R.id.dl_root)
     DrawerLayout dlRoot;
-    @Bind(R.id.wave_title_bg)
-    WaveView mWaveView;
+//    @Bind(R.id.wave_title_bg)
+//    WaveView mWaveView;
     private ActionBarDrawerToggle mDrawerToggle;
     private BaseFragment currentFragment;
     private boolean isDrawerOpen = false;
@@ -144,15 +144,15 @@ public class MainActivity extends FloatingButtonBaseActivity {
         contentInit(new HomeFragment(), HomeFragment.getMyTag());
 
         initFloatingActionButton();
-        initWaveView();
+//        initWaveView();
     }
 
-    private void initWaveView() {
-        ViewGroup.LayoutParams params = mWaveView.getLayoutParams();
-        toolbar.measure(0, 0);
-            params.height = toolbar.getMeasuredHeight();
-        mWaveView.setLayoutParams(params);
-    }
+//    private void initWaveView() {
+//        ViewGroup.LayoutParams params = mWaveView.getLayoutParams();
+//        toolbar.measure(0, 0);
+//        params.height = toolbar.getMeasuredHeight()+ViewUtils.dpToPx(48);
+//        mWaveView.setLayoutParams(params);
+//    }
 
 
 
@@ -292,7 +292,7 @@ public class MainActivity extends FloatingButtonBaseActivity {
         }, 50L);
     }
 
-    class HomeActionBarToggle  extends ActionBarDrawerToggle{
+    class HomeActionBarToggle extends ActionBarDrawerToggle{
         private String fragmentName;
         private String title;
 

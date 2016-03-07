@@ -25,4 +25,8 @@
     <color name="fab_menu_text_color">@color/text_color_gray</color>
     <color name="text_color_gray">#801d1d26</color>
     <color name="ivory">#ffeeeeee</color>
+
+    <color name="bg_swipe_item_neutral">#ffffffff</color>
+    <color name="bg_swipe_item_pinned">#2196F3</color>
+
 </resources>
