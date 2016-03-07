@@ -11,4 +11,6 @@
         <attr name="drawer_title" format="reference|string" />
         <attr name="drawer_title_color" format="reference|color" />
     </declare-styleable>
+
+
 </resources>

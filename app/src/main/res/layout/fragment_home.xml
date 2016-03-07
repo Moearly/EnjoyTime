@@ -1,6 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:recyclerviewfastscroller="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:paddingRight="22dp"
+                android:background="@color/white"
+                android:id="@+id/rl_home_head_tip"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="6dip">
+                <TextView
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="29dp"
+                    android:textSize="@dimen/main_font_ll"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/text_color_gray"
+                    android:id="@+id/tv_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016.02.17" />
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_today"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ProgressBar
+                            android:layout_weight="1"
+                            android:id="@+id/pb_today_invest"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:progressDrawable="@drawable/pb_invest"
+                            android:minHeight="@dimen/layout_height_tiny"
+                            style="?android:attr/progressBarStyleHorizontal" />
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/main_font_lll"
+                            android:textColor="@color/text_color_gray"
+                            android:id="@+id/tv_invest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.3h学习" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ProgressBar
+                            android:layout_weight="1"
+                            android:id="@+id/pb_today_waste"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:progressDrawable="@drawable/pb_waste"
+                            android:minHeight="@dimen/layout_height_tiny"
+                            style="?android:attr/progressBarStyleHorizontal" />
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/main_font_lll"
+                            android:textColor="@color/text_color_gray"
+                            android:id="@+id/tv_waste"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.3h学习" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:background="@color/white"
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/HomeRecyclerViewStyle"
+                    android:scrollbars="none"
+                    />
+                <!--<TextView-->
+                    <!--android:id="@+id/empty_tip"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/yesterday_empty"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:textColor="@color/my_blue"-->
+                    <!--/>-->
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -22,15 +22,13 @@ import java.lang.reflect.Field;
  */
 public class BaseFragment extends Fragment {
     protected Activity activity;
+    public static String getMyTag() {
+        return "base";
+    }
 
 
     public View findViewById(int res) {
         return getActivity().findViewById(res);
-    }
-
-
-    public static String getMyTag() {
-        return "base";
     }
 
     public void loadFirst() {

@@ -22,6 +22,7 @@
     <color name="yellow_black">#fffcab53</color>
     <color name="main_purple">#ff8c88ff</color>
     <color name="main_red">#ff3366</color>
-    <color name="fab_menu_text_color">#801d1d26</color>
-
+    <color name="fab_menu_text_color">@color/text_color_gray</color>
+    <color name="text_color_gray">#801d1d26</color>
+    <color name="ivory">#ffeeeeee</color>
 </resources>

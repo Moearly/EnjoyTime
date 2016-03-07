@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -39,6 +40,7 @@ import com.martn.enjoytime.ui.fragment.ViewLogFragment;
 import com.martn.enjoytime.utility.CusToast;
 import com.martn.enjoytime.utility.ViewUtils;
 import com.martn.enjoytime.view.DrawerRow;
+import com.martn.enjoytime.view.WaveView.WaveView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -84,6 +86,8 @@ public class MainActivity extends FloatingButtonBaseActivity {
     LinearLayout leftDrawer;
     @Bind(R.id.dl_root)
     DrawerLayout dlRoot;
+    @Bind(R.id.wave_title_bg)
+    WaveView mWaveView;
     private ActionBarDrawerToggle mDrawerToggle;
     private BaseFragment currentFragment;
     private boolean isDrawerOpen = false;
@@ -140,6 +144,14 @@ public class MainActivity extends FloatingButtonBaseActivity {
         contentInit(new HomeFragment(), HomeFragment.getMyTag());
 
         initFloatingActionButton();
+        initWaveView();
+    }
+
+    private void initWaveView() {
+        ViewGroup.LayoutParams params = mWaveView.getLayoutParams();
+        toolbar.measure(0, 0);
+            params.height = toolbar.getMeasuredHeight();
+        mWaveView.setLayoutParams(params);
     }
 
 
