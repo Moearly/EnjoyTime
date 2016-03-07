@@ -3,42 +3,51 @@
     android:id="@+id/dl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="?colorPrimary"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <View
-            android:id="@+id/status_bar_view"
-            android:layout_gravity="top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/theme_main_color"
-            />
-        <FrameLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <include layout="@layout/toolbar_layout"/>
-            <RelativeLayout
-                android:id="@+id/rl_title"
-                android:layout_width="fill_parent"
-                android:layout_height="?actionBarSize">
-                <TextView
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/white"
-                    android:gravity="center_vertical"
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:text="Time"
-                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
-            </RelativeLayout>
-        </FrameLayout>
-        <FrameLayout
-            android:id="@+id/fragment_container"
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:background="?colorPrimary"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/status_bar_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="top"
+                android:background="@color/theme_main_color" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/toolbar_layout" />
+                <RelativeLayout
+                    android:id="@+id/rl_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="?actionBarSize">
+                    <TextView
+                        android:id="@+id/tv_title"
+                        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:text="Time"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:foreground="@drawable/bottom_shadow"
+                android:id="@+id/fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
+
+        <include layout="@layout/include_floating_action_button" />
+    </FrameLayout>
 
     <include layout="@layout/drawer_view" />
 

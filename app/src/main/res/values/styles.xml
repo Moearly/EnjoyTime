@@ -66,4 +66,10 @@
         <item name="drawer_background_color">@color/theme_main_color</item>
     </style>
 
+
+    <style name="fab_menu_labels_style">
+        <item name="android:textColor">@color/fab_menu_text_color</item>
+        <item name="android:background">@drawable/card_bg</item>
+    </style>
+
 </resources>

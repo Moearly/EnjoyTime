@@ -3,6 +3,7 @@ package com.martn.enjoytime.utility;
 import android.util.DisplayMetrics;
 
 import com.martn.enjoytime.base.BaseApplication;
+import com.martn.enjoytime.base.FloatingButtonBaseActivity;
 
 /**
  * Title: EnjoyTime
@@ -40,4 +41,6 @@ public class ViewUtils {
         }
         return result;
     }
+
+
 }

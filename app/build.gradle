@@ -78,4 +78,8 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     // circle image view---圆角图片
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
+
+    //图片的放大与相关工具处理
+    compile 'com.commit451:PhotoView:1.2.4'
 }

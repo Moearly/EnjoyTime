@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <View android:id="@+id/fab_white_background"
+        android:background="#e6ffffff"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <ViewStub
+        android:layout_gravity="bottom|center|right"
+        android:id="@+id/fab_tip"
+        android:layout="@layout/fab_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="95.0dip"
+        android:layout_marginBottom="43.0dip" />
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="end|bottom|center"
+        android:id="@+id/fab_multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16.0dip"
+        android:layout_marginBottom="16.0dip"
+        fab:fab_addButtonColorPressed="#ff265bc6"
+        fab:fab_addButtonColorNormal="#ff448aff"
+        fab:fab_addButtonPlusIconColor="@android:color/white"
+        fab:fab_labelStyle="@style/fab_menu_labels_style">
+        <com.martn.enjoytime.view.TimeFloatingActionButton android:id="@+id/fab_add_time" android:layout_width="wrap_content" android:layout_height="wrap_content" fab:fab_colorPressed="#50bcb2" fab:fab_colorNormal="@color/theme_main_color" fab:fab_icon="@drawable/icon_fab_add_time" fab:fab_size="mini" fab:fab_title="@string/add_time" />
+        <com.martn.enjoytime.view.TimeFloatingActionButton android:id="@+id/fab_add_goal" android:layout_width="wrap_content" android:layout_height="wrap_content" fab:fab_colorPressed="#fc943a" fab:fab_colorNormal="@color/yellow_black" fab:fab_icon="@drawable/icon_fab_add_goal" fab:fab_size="mini" fab:fab_title="@string/add_goal" />
+        <com.martn.enjoytime.view.TimeFloatingActionButton android:id="@+id/fab_manger_goal" android:layout_width="wrap_content" android:layout_height="wrap_content" fab:fab_colorPressed="#8c70f6" fab:fab_colorNormal="@color/main_purple" fab:fab_icon="@drawable/icon_fab_manger_goal" fab:fab_size="mini" fab:fab_title="@string/manger_goal" />
+        <com.martn.enjoytime.view.TimeFloatingActionButton android:id="@+id/fab_check_hois" android:layout_width="wrap_content" android:layout_height="wrap_content" fab:fab_colorPressed="#cd0c68" fab:fab_colorNormal="@color/main_red" fab:fab_icon="@drawable/icon_fab_check_hois" fab:fab_size="mini" fab:fab_title="@string/check_hois" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+</merge>

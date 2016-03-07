@@ -19,5 +19,9 @@
     <color name="drawerArrowColor">@color/white</color>
     <color name="gray">#ffc0c0c0</color>
     <color name="default_toast_color">#bb000000</color>
+    <color name="yellow_black">#fffcab53</color>
+    <color name="main_purple">#ff8c88ff</color>
+    <color name="main_red">#ff3366</color>
+    <color name="fab_menu_text_color">#801d1d26</color>
 
 </resources>

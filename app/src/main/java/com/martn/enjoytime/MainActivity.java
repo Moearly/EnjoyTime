@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.martn.enjoytime.base.BaseActivity;
 import com.martn.enjoytime.base.BaseFragment;
+import com.martn.enjoytime.base.FloatingButtonBaseActivity;
 import com.martn.enjoytime.ui.fragment.CountInfoFragment;
 import com.martn.enjoytime.ui.fragment.EveryDayFragment;
 import com.martn.enjoytime.ui.fragment.HomeFragment;
@@ -46,7 +47,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FloatingButtonBaseActivity {
 
     protected Context ctx;
     @Bind(R.id.status_bar_view)
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         //填充数据
         contentInit(new HomeFragment(), HomeFragment.getMyTag());
 
+        initFloatingActionButton();
     }
 
 
@@ -156,6 +158,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    protected void handleFAB() {
+
     }
 
     /**

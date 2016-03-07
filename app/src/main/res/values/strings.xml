@@ -10,4 +10,8 @@
     <string name="man_goal">管理目标</string>
     <string name="view_log">查看记录</string>
     <string name="my">我的</string>
+    <string name="add_time">添加项目</string>
+    <string name="add_goal">添加目标</string>
+    <string name="manger_goal">管理目标</string>
+    <string name="check_hois">查看记录</string>
 </resources>
