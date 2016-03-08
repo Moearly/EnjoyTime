@@ -1,6 +1,8 @@
 package com.martn.enjoytime.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,13 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseFragment;
+import com.martn.enjoytime.db.dao.DistributionDao;
+import com.martn.enjoytime.ui.adapter.HomeSwipeableItemAdapter;
+import com.martn.enjoytime.utility.AppUtils;
+import com.martn.enjoytime.utility.DateHelper;
+import com.martn.enjoytime.utility.FormatUtils;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,6 +64,43 @@ public class HomeFragment extends BaseFragment {
         return "home";
     }
 
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 2) {
+                initHomeBar();
+            }
+        }
+    };
+
+    /**
+     * 初始化--更新home--顶部bar--ui
+     */
+    private void initHomeBar() {
+        DistributionDao dao = new DistributionDao(activity);//数据库中获取数据
+        String[] todayDis = dao.queryTodayDistribution();
+        tvInvest.setText(todayDis[0] + " " + getResources().getString(R.string.str_invest));
+        tvWaste.setText(todayDis[1] + " " + getResources().getString(R.string.str_waste));
+        setHomeTodayData();
+    }
+
+    /**
+     * 设置顶部今天时间显示
+     */
+    private void setHomeTodayData() {
+        Calendar c = Calendar.getInstance();
+        long now = c.getTime().getTime();
+        tvToday.setText(DateHelper.format(c.getTime(),"yyyy.MM.dd"));
+        tvToday.setTypeface(AppUtils.typefaceLatoLight);
+//        c.set(11, 23);
+//        c.set(12, 59);
+//        c.set(13, 59);
+        //设置今天剩余的时间
+        //tv.setText(FormatUtils.format_1fra((((double) (c.getTime().getTime() - now)) / 1000.0d) / 3600.0d) + "h");
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -90,6 +136,15 @@ public class HomeFragment extends BaseFragment {
 
         recyclerViewSwipeManager = new RecyclerViewSwipeManager();
 
-        mAdapter = new MySwipeableItemAdapter(mContext, RecordManager.SELECTED_RECORDS, this, this);
+        mAdapter = new HomeSwipeableItemAdapter(mContext, RecordManager.SELECTED_RECORDS, this, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Message msg = new Message();
+        msg.what = 2;
+        this.handler.sendMessage(msg);
+
     }
 }

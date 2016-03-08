@@ -1,9 +1,11 @@
 package com.martn.enjoytime.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,9 +34,28 @@ public class HomeSwipeableItemAdapter extends RecyclerView.Adapter<HomeSwipeable
 
 
     private static HashMap<Integer, Boolean> pinned;
+    private final OnItemDeleteListener onItemDeleteListener;
+    private final OnItemClickListener onItemClickListener;
+    private Context mContext;
     private List<GoalRecord> records;
     private interface Swipeable extends SwipeableItemConstants {
     }
+
+    public HomeSwipeableItemAdapter(Context inContext, List<GoalRecord> records, final OnItemDeleteListener onItemDeleteListener, OnItemClickListener onItemClickListener) {
+        mContext = inContext;
+        this.records = records;
+        this.onItemDeleteListener = onItemDeleteListener;
+        this.onItemClickListener = onItemClickListener;
+        // Todo optimize
+        pinned = new HashMap<>();
+        for (int i = records.size() - 1; i >= 0; i--) {
+            pinned.put((int)records.get(i).getId(), false);
+        }
+
+        setHasStableIds(true);
+    }
+
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -120,6 +141,14 @@ public class HomeSwipeableItemAdapter extends RecyclerView.Adapter<HomeSwipeable
         public View getSwipeableContainerView() {
             return mContainer;
         }
+    }
+
+    public interface OnItemDeleteListener {
+        void onSelectSumChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
 }

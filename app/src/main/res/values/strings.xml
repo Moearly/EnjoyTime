@@ -14,4 +14,5 @@
     <string name="add_goal">添加目标</string>
     <string name="manger_goal">管理目标</string>
     <string name="check_hois">查看记录</string>
+    <string name="str_invest">投资</string>
 </resources>

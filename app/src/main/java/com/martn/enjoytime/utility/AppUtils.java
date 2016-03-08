@@ -72,4 +72,17 @@ public class AppUtils {
         THEME_COLOR = ContextCompat.getColor(BaseApplication.context(), R.color.theme_main_color);
     }
 
+    public static String getExceptionString(Exception e) {
+        String errorString = e.toString() + "\r\n";
+        StackTraceElement[] stackArr = e.getStackTrace();
+        for (int i = 0; i < stackArr.length; i++) {
+            errorString = errorString + stackArr[i].toString();
+            if (i + 1 != stackArr.length) {
+                errorString = errorString + "\r\n";
+            }
+        }
+        return errorString;
+    }
+
+
 }
