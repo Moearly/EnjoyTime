@@ -15,4 +15,11 @@
     <string name="manger_goal">管理目标</string>
     <string name="check_hois">查看记录</string>
     <string name="str_invest">投资</string>
+    <string name="str_waste">浪费</string>
+    <string name="str_ins_invest">任何对目标产生实际帮助花费的时间。比如，你目标是英语考第一名，则你背一个小时的单词，做半个钟的阅读，这些时间花费都是投资;添加目标后投资自动隐藏，目标花费的时间归为投资时间。</string>
+    <string name="str_routine">固定</string>
+    <string name="str_ins_routine"><![CDATA[对目标没产生实际帮助的时间。比如：做无挑战的工作，上下班走路，做饭吃饭洗澡做家务上厕所等等，这些都归为日常固定支出。突发事件若对目标没实际帮助也可算成固定支出。如果你想将固定这个大类型进行细分，可以在设置->标签里开启固定标签，计时完成时可以添加标签。]]></string>
+    <string name="str_sleep">睡觉</string>
+    <string name="str_ins_sleep">每天睡觉的时间。比如：你晚上10点睡，第二天早上6点起床，则理论上睡了8个钟头。系统将每天第一个起床时间为当日起床时间。从每天00:00:00到23:59:59当作一天计算每天时间分配。</string>
+    <string name="str_ins_waste">即不是必须花费的对你没产生任何实际帮助的时间。比如：玩游戏、逛街、闲聊等对目标没有产生实际帮助的归为此类。系统会自动将未计算时间归入浪费时间，但用户仍然可以记录浪费时间，方便以后查阅。</string>
 </resources>

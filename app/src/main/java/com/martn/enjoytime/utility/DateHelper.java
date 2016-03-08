@@ -328,6 +328,14 @@ public class DateHelper {
         return format(Calendar.getInstance().getTime(), "yy-MM-dd HH:mm");
     }
 
+    /**
+     * 当前时间字符串--到秒
+     * @return
+     */
+    public static String getCurrentTimeString() {
+        return format(Calendar.getInstance().getTime(), "yyyy-MM-dd HH:mm:ss");
+    }
+
     public static String getCurrentDateString() {
         return format(Calendar.getInstance().getTime(), "yyyy-MM-dd");
     }

@@ -18,7 +18,10 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseFragment;
+import com.martn.enjoytime.bean.User;
+import com.martn.enjoytime.db.dao.ActionDao;
 import com.martn.enjoytime.db.dao.DistributionDao;
+import com.martn.enjoytime.db.dao.UserDao;
 import com.martn.enjoytime.ui.adapter.HomeSwipeableItemAdapter;
 import com.martn.enjoytime.utility.AppUtils;
 import com.martn.enjoytime.utility.DateHelper;
@@ -115,6 +118,7 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -126,6 +130,21 @@ public class HomeFragment extends BaseFragment {
 
 
     }
+
+    public void initAfterLogin() {
+        UserDao dao = new UserDao(activity);
+        dao.getLoginUser();
+        if (User.getInstance() == null) {
+            //当没有注册的账号--使用本地测试账号
+            dao.initTestUser();//添加---或者使用测试账号
+        }
+        ActionDao actionDao = new ActionDao(activity);
+
+        actionDao.insertDefalutGoal();
+        DbUtils.insertDb_LabelType(context);
+        updateUiGoalsList();
+    }
+
 
     private void initView() {
         layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);

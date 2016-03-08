@@ -1,6 +1,13 @@
 package com.martn.enjoytime.db.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+
+import com.martn.enjoytime.R;
+import com.martn.enjoytime.bean.User;
+import com.martn.enjoytime.utility.AppUtils;
+import com.martn.enjoytime.utility.DateHelper;
 
 /**
  * Title: EnjoyTime
@@ -37,9 +44,58 @@ public class ActionDao extends ModelDaoBase{
     public static final String IS_DEFAULT = "is_default";
     public static final String IS_HIDED = "is_hided";
     public static final String RESET_COUNT = "reset_count";
+    public static final String CREATE_TIME = "create_time";
 
+    public void insertDefalutGoal() {
+        UserDao dao = new UserDao(ctx);
+        Cursor cursor = db.rawQuery("Select "+UID+" from "+TABLE_NAME+" where "+USER_ID+" is ? order by "+POSITION+" limit 1", new String[]{dao.getUserId()});
+        if (cursor.getCount() == 0) {
+            ContentValues values = new ContentValues();
+            values.put(USER_ID, User.getInstance().getUserId());
+            values.put(IMAGE, "desklamp");
+            values.put(COLOR, AppUtils.addColors[0]);
+            values.put(ACTION_NAME, ctx.getResources().getString(R.string.str_invest));
+            values.put(POSITION, 1);
+            values.put(TYPE, 10);
+            values.put(CREATE_TIME, DateHelper.getCurrentTimeString());
+            values.put(INTRUCTION, ctx.getResources().getString(R.string.str_ins_invest));
+            db.insert(TABLE_NAME, null, values);
 
+            values = new ContentValues();
+            values.put(USER_ID, User.getInstance().getUserId());
+            values.put(IMAGE, "computer");
+            values.put(COLOR, AppUtils.addColors[1]);
+            values.put(ACTION_NAME, ctx.getResources().getString(R.string.str_routine));
+            values.put(POSITION, 2);
+            values.put(TYPE, 20);
+            values.put(CREATE_TIME, DateHelper.getCurrentTimeString());
+            values.put(INTRUCTION, ctx.getResources().getString(R.string.str_ins_routine));
+            db.insert(TABLE_NAME, null, values);
 
+            values = new ContentValues();
+            values.put(USER_ID, User.getInstance().getUserId());
+            values.put(IMAGE, "bed");
+            values.put(COLOR, AppUtils.addColors[2]);
+            values.put(ACTION_NAME, ctx.getResources().getString(R.string.str_sleep));
+            values.put(POSITION, 3);
+            values.put(TYPE, 30);
+            values.put(CREATE_TIME, DateHelper.getCurrentTimeString());
+            values.put(INTRUCTION, ctx.getResources().getString(R.string.str_ins_sleep));
+            db.insert(TABLE_NAME, null, values);
+
+            values = new ContentValues();
+            values.put(USER_ID, User.getInstance().getUserId());
+            values.put(IMAGE, "trash");
+            values.put(COLOR, AppUtils.addColors[0]);
+            values.put(ACTION_NAME, ctx.getResources().getString(R.string.str_waste));
+            values.put(POSITION, 4);
+            values.put(TYPE, 40);
+            values.put(CREATE_TIME, DateHelper.getCurrentTimeString());
+            values.put(INTRUCTION, ctx.getResources().getString(R.string.str_ins_waste));
+            db.insert(TABLE_NAME, null, values);
+        }
+        close(cursor);
+    }
 
 
 

@@ -50,6 +50,12 @@ public class AppUtils {
 
     public static int THEME_COLOR;
 
+    public static String[] addColors;
+
+
+    public static final int ADD_COLOR_COUNT = 3;
+
+
     public static void init(Context context) {
 
         typefaceLatoRegular = Typeface.createFromAsset(
@@ -70,6 +76,12 @@ public class AppUtils {
         random = new Random();
 
         THEME_COLOR = ContextCompat.getColor(BaseApplication.context(), R.color.theme_main_color);
+
+        addColors = new String[ADD_COLOR_COUNT];
+        addColors[0] = "bg_green";
+        addColors[1] = "bg_purple";
+        addColors[2] = "bg_yellow";
+
     }
 
     public static String getExceptionString(Exception e) {

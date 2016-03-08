@@ -77,6 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + ActionDao.END_UPDATE_TIME+" varchar(20),"
             + ActionDao.UPLOAD_TIME+" varchar(20),"
             + ActionDao.IS_UPLOAD+" integer,"
+            + ActionDao.CREATE_TIME+" String,"
             + ActionDao.UPDATED_AT+" datetime default CURRENT_TIMESTAMP);";
 
     private final String CREATE_ACTION_ITEM = "CREATE TABLE if not exists "+ ActionItemDao.TABLE_NAME+"("+ActionItemDao.UID+" integer primary key autoincrement not null,"
