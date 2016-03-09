@@ -18,6 +18,7 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.base.BaseFragment;
+import com.martn.enjoytime.bean.ActionItem;
 import com.martn.enjoytime.bean.User;
 import com.martn.enjoytime.db.dao.ActionDao;
 import com.martn.enjoytime.db.dao.DistributionDao;
@@ -27,7 +28,9 @@ import com.martn.enjoytime.utility.AppUtils;
 import com.martn.enjoytime.utility.DateHelper;
 import com.martn.enjoytime.utility.FormatUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,6 +66,7 @@ public class HomeFragment extends BaseFragment {
     private RecyclerViewTouchActionGuardManager recyclerViewTouchActionGuardManager;
     private RecyclerViewSwipeManager recyclerViewSwipeManager;
 
+    private List<ActionItem> goalsData = new ArrayList<>();
     public static String getMyTag() {
         return "home";
     }
@@ -118,7 +122,6 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -127,8 +130,8 @@ public class HomeFragment extends BaseFragment {
 
     private void init() {
         initView();
-
-
+        initAfterLogin();
+        isNewUser();
     }
 
     public void initAfterLogin() {
@@ -140,10 +143,48 @@ public class HomeFragment extends BaseFragment {
         }
         ActionDao actionDao = new ActionDao(activity);
 
-        actionDao.insertDefalutGoal();
-        DbUtils.insertDb_LabelType(context);
-        updateUiGoalsList();
+        actionDao.insertDefalutGoal();//初始化用户插入默认的数据
+        upDataUiList();
     }
+
+    /**
+     * 更新ui列表中的数据
+     */
+    private void upDataUiList() {
+
+    }
+
+    /**
+     * 更新目标
+     */
+    private void initGoalUI() {
+
+        goalsData.clear();
+
+    }
+
+
+
+
+    /**
+     * 判断是否是新用户--提示
+     */
+    private void isNewUser() {
+//        int CONFIGURE_SHOW_GUIDE = PreferUtils.getSP(context).getInt(Val.CONFIGURE_IS_SHOW_GUIDE, 0);
+//        if (getGoalNumber() <= 0 && CONFIGURE_SHOW_GUIDE < 4) {
+//            new Builder(context).setTitle(getString(R.string.str_prompt)).setMessage((CharSequence) "\u4f60\u662f\u65b0\u624b\u5417\uff1f").setPositiveButton((CharSequence) "\u6211\u662f\u65b0\u624b", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    TodayActivity.this.AddGoalActivity();
+//                    dialog.cancel();
+//                }
+//            }).setNegativeButton((CharSequence) "\u6211\u5df2\u4f1a\u4f7f\u7528", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            }).create().show();
+//        }
+    }
+
 
 
     private void initView() {
@@ -155,7 +196,7 @@ public class HomeFragment extends BaseFragment {
 
         recyclerViewSwipeManager = new RecyclerViewSwipeManager();
 
-        mAdapter = new HomeSwipeableItemAdapter(mContext, RecordManager.SELECTED_RECORDS, this, this);
+//        mAdapter = new HomeSwipeableItemAdapter(mContext, RecordManager.SELECTED_RECORDS, this, this);
     }
 
     @Override

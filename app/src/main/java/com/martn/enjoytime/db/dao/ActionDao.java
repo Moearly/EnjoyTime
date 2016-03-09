@@ -3,6 +3,8 @@ package com.martn.enjoytime.db.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.bean.User;
@@ -97,6 +99,115 @@ public class ActionDao extends ModelDaoBase{
         close(cursor);
     }
 
+
+    public void getGoals() {
+        UserDao dao = new UserDao(ctx);
+//        Cursor cur = db.rawQuery("Select * from (Select * from "+TABLE_NAME+" where "+USER_ID+" is "+dao.getUserId()+" and "+IS_DELETE+" is not 1 and "+IS_FINISH+" is not 1 and "+IS_MANU_SCRIPT+" is not 1 ) where "+IS_SUB_GOAL+" is null or "+IS_SUB_GOAL+" is 0 ORDER BY "+POSITION, null);
+//        if (cur.getCount() > 0) {
+//            while (cur.moveToNext()) {
+//                String id = cur.getString(cur.getColumnIndex(UID));
+//                int type = cur.getInt(cur.getColumnIndex(TYPE));
+//                if (cur.getCount() <= 4 || type != 10) {
+//                    String actName = cur.getString(cur.getColumnIndex(ACTION_NAME));
+//                    String image = cur.getString(cur.getColumnIndex(IMAGE));
+//                    String color = cur.getString(cur.getColumnIndex(COLOR));
+//                    String intruction = cur.getString(cur.getColumnIndex(INTRUCTION));
+//                    int isSubGoal = cur.getInt(cur.getColumnIndex(IS_SUB_GOAL));
+//                    int isHided = cur.getInt(cur.getColumnIndex(IS_HIDED));
+//                    int hadSpend = 0;
+//                    if (type == 11) {
+//                        try {
+//
+//                            hadSpend = (int) DbUtils.queryStaticsHadInvestByGoalId(context, Integer.parseInt(id));
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    if (type == 10) {
+//                        intruction = ctx.getResources().getString(R.string.str_help_time);
+//                    } else if (type == 20) {
+//                        intruction = ctx.getResources().getString(R.string.str_oblige_helpless_time);
+//                    } else if (type == 30) {
+//                        intruction = ctx.getResources().getString(R.string.str_sleep_time);
+//                    } else if (type == 40) {
+//                        intruction = ctx.getResources().getString(R.string.str_helpless_time);
+//                    }
+//                    String deadtime = cur.getString(cur.getColumnIndex(DEAD_TIME));
+//                    String[] strArr = new String[]{id, actName, color, image, intruction, deadtime};
+//                    int isShowConnerLabel = 0;
+//
+//                    if (isSubGoal > 0 && type == 11) {
+//                        isShowConnerLabel = 2;
+//                    } else if (type == 11) {
+//                        isShowConnerLabel = 1;
+//                    }
+//
+//
+//                    String[] strArr2;
+//                    int i;
+//                    int i2;
+//                    if (type == 11) {
+//                        Cursor cursor2 = DbUtils.getDb(context).rawQuery(Sql.getSubGoals(context, id), null);
+//                        if (cursor2.getCount() > 0) {
+//                            LayoutParams layoutParams = new RelativeLayout.LayoutParams(-1, -2);
+//                            layoutParams.addRule(3, rlId - 1);
+//                            layoutParams.topMargin = 5;
+//                            View rl = (RelativeLayout) this.inflater.inflate(R.layout.tem_rl_big_goal, null);
+//                            rl.setLayoutParams(layoutParams);
+//                            rl.setId(rlId);
+//                            rl.addView(getGoalItems(Status.NETWORK_FAIL, strArr, isShowConnerLabel, isHided, (double) hadSpend, dbType));
+//                            int bigGoalRlId = Status.NETWORK_FAIL + 1;
+//                            while (cursor2.moveToNext()) {
+//                                String id2 = cursor2.getString(cursor2.getColumnIndex(f.bu));
+//                                String actName2 = cursor2.getString(cursor2.getColumnIndex("actName"));
+//                                String image2 = cursor2.getString(cursor2.getColumnIndex("image"));
+//                                String color2 = cursor2.getString(cursor2.getColumnIndex("color"));
+//                                String intruction2 = cursor2.getString(cursor2.getColumnIndex("intruction"));
+//                                int dbType2 = cursor2.getInt(cursor2.getColumnIndex(com.umeng.update.a.c));
+//                                int isSubGoal2 = cursor2.getInt(cursor2.getColumnIndex("isSubGoal"));
+//                                int isHided2 = cursor2.getInt(cursor2.getColumnIndex("isHided"));
+//                                int hadSpend2 = cursor2.getInt(cursor2.getColumnIndex("hadSpend"));
+//                                String startTime2 = cursor2.getString(cursor2.getColumnIndex("startTime"));
+//                                String deadline2 = cursor2.getString(cursor2.getColumnIndex("deadline"));
+//                                if (dbType2 == 11) {
+//                                    hadSpend2 = (int) DbUtils.queryStaticsHadInvestByGoalId(context, Integer.parseInt(id2));
+//                                }
+//                                String[] strArr22 = new String[]{id2, actName2, color2, image2, intruction2, deadline2};
+//                                isShowConnerLabel = 0;
+//                                if (isSubGoal2 > 0 && dbType2 == 11) {
+//                                    isShowConnerLabel = 2;
+//                                } else if (dbType2 == 11) {
+//                                    isShowConnerLabel = 1;
+//                                }
+//                                int i3 = bigGoalRlId;
+//                                int i4 = isShowConnerLabel;
+//                                RelativeLayout relativeLayout = rl;
+//                                relativeLayout.addView(getGoalItems(i3, strArr22, i4, isHided2, (double) hadSpend2, dbType2));
+//                                bigGoalRlId++;
+//                            }
+//                            this.rl_today_items.addView(rl);
+//                        } else {
+//                            strArr2 = strArr;
+//                            i = 4;
+//                            i2 = isHided;
+//                            this.rl_today_items.addView(getGoalItems(rlId, strArr2, i, i2, (double) hadSpend, dbType));
+//                        }
+//                        DbUtils.close(cursor2);
+//                    } else {
+//                        strArr2 = strArr;
+//                        i = isShowConnerLabel;
+//                        i2 = isHided;
+//                        this.rl_today_items.addView(getGoalItems(rlId, strArr2, i, i2, (double) hadSpend, dbType));
+//                    }
+//                    rlId++;
+//                    if (cur.isLast()) {
+//                        this.rl_today_items.addView(getAddView(rlId));
+//                    }
+//                }
+//            }
+//        }
+//        DbUtils.close(cur);
+    }
 
 
     public ActionDao(Context context) {
