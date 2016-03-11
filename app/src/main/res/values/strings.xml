@@ -22,4 +22,9 @@
     <string name="str_sleep">睡觉</string>
     <string name="str_ins_sleep">每天睡觉的时间。比如：你晚上10点睡，第二天早上6点起床，则理论上睡了8个钟头。系统将每天第一个起床时间为当日起床时间。从每天00:00:00到23:59:59当作一天计算每天时间分配。</string>
     <string name="str_ins_waste">即不是必须花费的对你没产生任何实际帮助的时间。比如：玩游戏、逛街、闲聊等对目标没有产生实际帮助的归为此类。系统会自动将未计算时间归入浪费时间，但用户仍然可以记录浪费时间，方便以后查阅。</string>
+    <string name="input_habit_name">请输入习惯名称</string>
+    <string name="icon_option">图标选择</string>
+    <string name="reset">重置</string>
+    <string name="input_encourage_to_say">说点什么鼓励自己吧</string>
+    <string name="color_option">颜色选择</string>
 </resources>

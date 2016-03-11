@@ -234,6 +234,7 @@ public class TimeFloatingActionButton extends FloatingActionButton {
         return this.mTitle;
     }
 
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(this.mDrawableSize, this.mDrawableSize);

@@ -29,4 +29,8 @@
     <color name="bg_swipe_item_neutral">#ffffffff</color>
     <color name="bg_swipe_item_pinned">#2196F3</color>
 
+    <color name="main_text_color">#4c4c4c</color>
+    <color name="main_text_hint">@color/text_color_gray</color>
+    <color name="divider_gray">@color/text_color_gray</color>
+
 </resources>
