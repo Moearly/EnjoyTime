@@ -88,4 +88,6 @@ dependencies {
             transitive=true
         }
     }
+    //一个扩展原生控件支持圆角矩形框背景的库,可以减少相关shape资源文件使用.
+    compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
 }

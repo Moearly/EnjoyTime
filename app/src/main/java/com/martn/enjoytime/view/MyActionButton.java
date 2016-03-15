@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -16,22 +14,19 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
-import android.support.annotation.IntDef;
-import android.support.v4.view.ViewCompat;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
 import com.martn.enjoytime.R;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
-import uk.co.senab.photoview.IPhotoView;
 
 /**
  * Title: EnjoyTime
  * Package: com.martn.enjoytime.view
- * Description: ("请描述功能")
+ * Description: ("自定义的button")
  * Date 2016/3/11 16:46
  *
  * @author MartnLei MartnLei_163_com
@@ -39,11 +34,8 @@ import uk.co.senab.photoview.IPhotoView;
  */
 public class MyActionButton extends ImageButton {
 
-
     int mColorRound;
     private float mIconSize;
-
-
     int mColorNormal;
     int mColorPressed;
     int mColorDisabled;
@@ -51,10 +43,13 @@ public class MyActionButton extends ImageButton {
     private int mIcon;
     private Drawable mIconDrawable;
     private float mSize;
-    private float mRadius;
+    private float mBorder;
+    //整个显示背景区域的大小
     private int mDrawableSize;
+    //圆圈的size
     private float mCircleSize;
-    private float defaultButtonSize = 40;
+
+    private boolean isShowIcon = true;
 
     public MyActionButton(Context context) {
         this(context, null);
@@ -77,10 +72,14 @@ public class MyActionButton extends ImageButton {
         mColorPressed = attr.getColor(R.styleable.MyActionButton_colorPressed, getColor(android.R.color.holo_blue_light));
         mColorDisabled = attr.getColor(R.styleable.MyActionButton_colorDisabled, getColor(android.R.color.darker_gray));
         mColorRound = attr.getColor(R.styleable.MyActionButton_colorRound, getColor(android.R.color.darker_gray));
-        mIconSize = attr.getFloat(R.styleable.MyActionButton_iconSize,0);
-        mRadius = attr.getFloat(R.styleable.MyActionButton_radius,0);
-        mSize = attr.getFloat(R.styleable.MyActionButton_size,defaultButtonSize);
-        mIcon = attr.getResourceId(R.styleable.MyActionButton_icon, 0);
+
+        mSize = attr.getDimensionPixelSize(R.styleable.MyActionButton_sizeR, 0);
+
+        mIconSize = attr.getDimensionPixelSize(R.styleable.MyActionButton_iconSize,0);
+        mIcon = attr.getResourceId(R.styleable.MyActionButton_iconA, 0);
+
+        mBorder = attr.getDimensionPixelSize(R.styleable.MyActionButton_border,0);
+
         updateCircleSize();
         updateDrawableSize();
         updateBackground();
@@ -94,59 +93,44 @@ public class MyActionButton extends ImageButton {
 
     void updateBackground() {
 
-        LayerDrawable layerDrawable = new LayerDrawable(drawableArr);
-
-        int iconOffset = (int) (mCircleSize - mIconSize) / 2;
-
-        int circleInsetHorizontal = (int) (mShadowRadius);
-        int circleInsetTop = (int) (mShadowRadius - mShadowOffset);
-        int circleInsetBottom = (int) (mShadowRadius + mShadowOffset);
-
-        layerDrawable.setLayerInset(0,
-                circleInsetHorizontal,
-                circleInsetTop,
-                circleInsetHorizontal,
-                circleInsetBottom);
-
-        layerDrawable.setLayerInset(1,
-                (int) (circleInsetHorizontal - halfStrokeWidth),
-                (int) (circleInsetTop - halfStrokeWidth),
-                (int) (circleInsetHorizontal - halfStrokeWidth),
-                (int) (circleInsetBottom - halfStrokeWidth));
-
-        layerDrawable.setLayerInset(2,
-                circleInsetHorizontal + iconOffset,
-                circleInsetTop + iconOffset,
-                circleInsetHorizontal + iconOffset,
-                circleInsetBottom + iconOffset);
-
-        setBackgroundCompat(createFillDrawable());
-    }
-
-    /**
-     * 创建一个带状态的drawable
-     * @return
-     */
-    private StateListDrawable createFillDrawable() {
         StateListDrawable drawable = new StateListDrawable();
-//        drawable.addState(new int[] { -android.R.attr.state_enabled }, createCircleDrawable());
+        drawable.addState(new int[] { -android.R.attr.state_enabled }, createPressedDrawable());
         drawable.addState(new int[] { android.R.attr.state_pressed }, createPressedDrawable());
         drawable.addState(new int[] { }, createNormalDrawable());
-        return drawable;
+
+        setBackgroundCompat(drawable);
     }
 
-    private Drawable createPressedDrawable() {
 
+    /**
+     * 三层颜色
+     * @return
+     */
+    private Drawable createPressedDrawable() {
+        Drawable[] drawableArr = new Drawable[3];
+        drawableArr[0] = createCircleDrawable(mColorRound);
+        drawableArr[1] = createCircleDrawable(mColorPressed);
+        drawableArr[2] = getIconDrawable();
+        LayerDrawable layerDrawable = new LayerDrawable(drawableArr);
+        int iconOffset = ((int) (mDrawableSize - mIconSize)) / 2;
+        int boderOffset = (int) mBorder;
+        layerDrawable.setLayerInset(0,0,0,0,0);
+        layerDrawable.setLayerInset(1, boderOffset, boderOffset, boderOffset, boderOffset);
+        layerDrawable.setLayerInset(2, iconOffset, iconOffset, iconOffset, iconOffset);
+        return layerDrawable;
     }
 
     private Drawable createNormalDrawable() {
-        Drawable[] drawableArr = new Drawable[2];
-        drawableArr[0] = createCircleDrawable(mColorNormal);
-        drawableArr[1] = getIconDrawable();
+        Drawable[] drawableArr = new Drawable[3];
+        drawableArr[0] = createCircleDrawable(Color.TRANSPARENT);
+        drawableArr[1] = createCircleDrawable(mColorNormal);
+        drawableArr[2] = getIconDrawable();
         LayerDrawable layerDrawable = new LayerDrawable(drawableArr);
-        int iconOffset = ((int) (mCircleSize - mIconSize)) / 2;
+        int iconOffset = ((int) (mDrawableSize - mIconSize)) / 2;
+        int boderOffset = (int) mBorder;
         layerDrawable.setLayerInset(0,0,0,0,0);
-        layerDrawable.setLayerInset(1, iconOffset, iconOffset, iconOffset, iconOffset);
+        layerDrawable.setLayerInset(1, boderOffset, boderOffset, boderOffset, boderOffset);
+        layerDrawable.setLayerInset(2, iconOffset, iconOffset, iconOffset, iconOffset);
         return layerDrawable;
     }
 
@@ -156,8 +140,6 @@ public class MyActionButton extends ImageButton {
      * @return
      */
     private Drawable createCircleDrawable(int color) {
-        int alpha = Color.alpha(color);
-        int opaqueColor = opaque(color);//不透明的颜色--转换
         ShapeDrawable fillDrawable = new ShapeDrawable(new OvalShape());
         final Paint paint = fillDrawable.getPaint();
         paint.setAntiAlias(true);
@@ -165,64 +147,6 @@ public class MyActionButton extends ImageButton {
         return fillDrawable;
     }
 
-    /**
-     * 转换为不透明
-     * @param argb
-     * @return
-     */
-    private int opaque(int argb) {
-        return Color.rgb(Color.red(argb), Color.green(argb), Color.blue(argb));
-    }
-
-    /**
-     * 画一个线宽为width---的圆
-     * @param width
-     * @return
-     */
-    private Drawable createOuterStrokeDrawable(float width, int color) {
-        ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
-        Paint paint = shapeDrawable.getPaint();
-        paint.setAntiAlias(true);
-        paint.setStrokeWidth(width);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(opaque(color));
-        paint.setAlpha(opacityToAlpha(0.3f));
-        return shapeDrawable;
-    }
-
-    private int opacityToAlpha(float opacity) {
-        return (int) (255.0f * opacity);
-    }
-
-    private Drawable createInnerStrokesDrawable(final int color, float strokeWidth) {
-        if (!this.mStrokeVisible) {
-            return new ColorDrawable(Color.TRANSPARENT);
-        }
-        ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
-        final int bottomStrokeColor = darkenColor(color);
-        final int bottomStrokeColorHalfTransparent = halfTransparent(bottomStrokeColor);
-        final int topStrokeColor = lightenColor(color);
-        final int topStrokeColorHalfTransparent = halfTransparent(topStrokeColor);
-        Paint paint = shapeDrawable.getPaint();
-        paint.setAntiAlias(true);
-        paint.setStrokeWidth(strokeWidth);
-        paint.setStyle(Paint.Style.STROKE);
-        shapeDrawable.setShaderFactory(new ShapeDrawable.ShaderFactory() {
-            @Override
-            public Shader resize(int width, int height) {
-                return new LinearGradient((float) (width / 2), 0.0f, (float) (width / 2),
-                        (float) height,
-                        new int[]{
-                                topStrokeColor,
-                                topStrokeColorHalfTransparent,
-                                color,
-                                bottomStrokeColorHalfTransparent,
-                                bottomStrokeColor},
-                        new float[]{0.0f, 0.2f, 0.5f, 0.8f, IPhotoView.DEFAULT_MIN_SCALE}, Shader.TileMode.CLAMP);
-            }
-        });
-        return shapeDrawable;
-    }
 
     Drawable getIconDrawable() {
         if (mIconDrawable != null) {
@@ -235,7 +159,7 @@ public class MyActionButton extends ImageButton {
     }
 
     private void updateDrawableSize() {
-        mDrawableSize = (int) (mCircleSize + 2 * mRadius);
+        mDrawableSize = (int) (mCircleSize + 2 * mBorder);
     }
 
     private void updateCircleSize() {
@@ -260,5 +184,64 @@ public class MyActionButton extends ImageButton {
         }
     }
 
+    public void setColorNormalResId(@ColorRes int colorNormal) {
+        setColorNormal(getColor(colorNormal));
+    }
+
+    public void setColorNormal(int color) {
+        if (this.mColorNormal != color) {
+            this.mColorNormal = color;
+            updateBackground();
+        }
+    }
+
+    public void setColorDisabledResId(@ColorRes int colorDisabled) {
+        setColorDisabled(getColor(colorDisabled));
+    }
+
+    public void setColorDisabled(int color) {
+        if (this.mColorDisabled != color) {
+            this.mColorDisabled = color;
+            updateBackground();
+        }
+    }
+
+    public void setColorPressedResId(@ColorRes int color) {
+        setColorPressed(getColor(color));
+    }
+
+    public void setColorPressed(int color) {
+        if (this.mColorPressed != color) {
+            this.mColorPressed = color;
+            updateBackground();
+        }
+    }
+
+    public void setColorBorderResId(@ColorRes int color) {
+        setColorBorder(getColor(color));
+    }
+
+    public void setColorBorder(int color) {
+        if (this.mColorRound != color) {
+            this.mColorRound = color;
+            updateBackground();
+        }
+    }
+
+    public void setIcon(@DrawableRes int icon) {
+        if (this.mIcon != icon) {
+            this.mIcon = icon;
+            this.mIconDrawable = null;
+            updateBackground();
+        }
+    }
+
+    public void setIconDrawable(@NonNull Drawable iconDrawable) {
+        if (this.mIconDrawable != iconDrawable) {
+            this.mIcon = 0;
+            this.mIconDrawable = iconDrawable;
+            updateBackground();
+        }
+    }
 
 }

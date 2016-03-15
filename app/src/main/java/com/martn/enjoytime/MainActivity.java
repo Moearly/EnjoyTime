@@ -127,7 +127,9 @@ public class MainActivity extends FloatingButtonBaseActivity {
             }
         }
 
-        mDrawerToggle = new HomeActionBarToggle(this, dlRoot, 0, 0);
+
+
+        mDrawerToggle = new HomeActionBarToggle(this, dlRoot,toolbar, 0, 0);
         mDrawerToggle.syncState();
         dlRoot.setDrawerListener(mDrawerToggle);
         //初始化---homeMeun的组件
@@ -306,8 +308,8 @@ public class MainActivity extends FloatingButtonBaseActivity {
 
         }
 
-        public HomeActionBarToggle(Activity activity, DrawerLayout drawerLayout, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
-            super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
+        public HomeActionBarToggle(Activity activity, DrawerLayout drawerLayout,Toolbar toolbar ,@StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar,openDrawerContentDescRes, closeDrawerContentDescRes);
         }
 
 

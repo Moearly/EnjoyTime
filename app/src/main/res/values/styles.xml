@@ -47,7 +47,7 @@
 
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/drawerArrowColor</item>
+        <item name="color">@color/white</item>
     </style>
 
     <style name="Toolbar">

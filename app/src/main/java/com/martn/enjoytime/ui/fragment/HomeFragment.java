@@ -23,7 +23,6 @@ import com.martn.enjoytime.bean.User;
 import com.martn.enjoytime.db.dao.ActionDao;
 import com.martn.enjoytime.db.dao.DistributionDao;
 import com.martn.enjoytime.db.dao.UserDao;
-import com.martn.enjoytime.ui.adapter.HomeSwipeableItemAdapter;
 import com.martn.enjoytime.utility.AppUtils;
 import com.martn.enjoytime.utility.DateHelper;
 import com.martn.enjoytime.utility.FormatUtils;

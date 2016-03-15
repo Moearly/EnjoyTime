@@ -16,10 +16,10 @@
         <attr name="colorNormal" format="reference|color" />
         <attr name="colorPressed" format="reference|color" />
         <attr name="colorDisabled" format="reference|color" />
-        <attr name="size" format="reference|dimension" />
-        <attr name="icon" format="reference" />
+        <attr name="sizeR" format="reference|dimension" />
+        <attr name="iconA" format="reference" />
         <attr name="colorRound" format="reference|color" />
-        <attr name="radius" format="reference|dimension" />
+        <attr name="border" format="reference|dimension" />
         <attr name="iconSize" format="reference|dimension" />
     </declare-styleable>
 

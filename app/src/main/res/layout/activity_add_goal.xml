@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
@@ -9,7 +10,6 @@
         android:divider="@drawable/ll_divider_h"
         android:orientation="vertical"
         android:showDividers="middle|end">
-
         <EditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
@@ -129,5 +129,34 @@
                 android:focusableInTouchMode="false"
                 android:numColumns="7"/>
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/rt_cancel"
+            android:gravity="center"
+            android:layout_gravity=""
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/cancel_habit"
+            android:textColor="@color/white"
+            rv:rv_backgroundColor="#66dddddd"
+            rv:rv_backgroundPressColor="@color/text_color_gray"
+            rv:rv_strokeWidth="0dp"
+            rv:rv_textPressColor="@color/text_color_gray"/>
+        <com.flyco.roundview.RoundTextView
+            android:id="@+id/rt_save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/save_habit"
+            android:textColor="@color/white"
+            rv:rv_backgroundColor="@color/theme_main_color"
+            rv:rv_backgroundPressColor="@color/theme_main_color_press"
+            rv:rv_strokeWidth="0dp"
+            rv:rv_textPressColor="@color/text_color_gray"/>
     </LinearLayout>
 </FrameLayout>

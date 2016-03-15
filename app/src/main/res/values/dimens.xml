@@ -12,4 +12,7 @@
     <dimen name="layout_height_tiny">3.0dip</dimen>
     <dimen name="main_font_ll">13sp</dimen>
     <dimen name="common_padding">12dp</dimen>
+    <dimen name="my_action_btn_big">50dp</dimen>
+    <dimen name="my_action_btn_small">31dp</dimen>
+
 </resources>
