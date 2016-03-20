@@ -76,6 +76,11 @@ public class AddGoalActivity extends SwipeBackActivity {
 
     private void init() {
         //判断是编辑--还是新增---这里会有两种状态--占时只是处理新增
+        initIconSel();
+    }
+
+    private void initIconSel() {
+
     }
 
     private void initToolbar() {
