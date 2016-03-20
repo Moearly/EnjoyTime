@@ -30,4 +30,7 @@
     <string name="cancel_habit">取消习惯</string>
     <string name="save_habit">保存习惯</string>
     <string name="add_habit">添加习惯</string>
+    <string name="goalname_not_null">目标的名字不能为空</string>
+    <string name="modify_success">修改成功</string>
+    <string name="add_success">新增成功</string>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import com.martn.enjoytime.R;
 import com.martn.enjoytime.bean.User;
+import com.martn.enjoytime.db.DBHelper;
 import com.martn.enjoytime.utility.AppUtils;
 import com.martn.enjoytime.utility.DateHelper;
 
@@ -29,7 +30,7 @@ public class ActionDao extends ModelDaoBase{
     public static final String TYPE = "type";
     public static final String START_TIME = "start_time";//目标的开始时间
     public static final String DEAD_TIME = "dead_time";//目标预定结束的时间---期限
-    public static final String LEVEL = "level";//目标自定义的级别
+    //public static final String LEVEL = "level";//目标自定义的级别
     public static final String TIME_OF_EVERYDAY = "time_of_everyday";//平均每天的时间
     public static final String EXPECT_SPEND = "expect_spend";
     public static final String HAD_SPEND = "had_spend";
@@ -41,8 +42,8 @@ public class ActionDao extends ModelDaoBase{
     public static final String INTRUCTION = "intruction";
     public static final String POSITION = "position";
     public static final String SEVER_ID = "sever_id";
-    public static final String IS_SUB_GOAL = "is_sub_goal";
-    public static final String IS_MANU_SCRIPT = "is_manu_script";
+//    public static final String IS_SUB_GOAL = "is_sub_goal";
+//    public static final String IS_MANU_SCRIPT = "is_manu_script";
     public static final String IS_DEFAULT = "is_default";
     public static final String IS_HIDED = "is_hided";
     public static final String RESET_COUNT = "reset_count";
@@ -210,7 +211,23 @@ public class ActionDao extends ModelDaoBase{
     }
 
 
+
     public ActionDao(Context context) {
         super(context);
+    }
+
+    /**
+     * 更新item
+     * @param values
+     * @param actId
+     */
+    public void updateActionItem(ContentValues values, String actId) {
+        db.update(TABLE_NAME, values,UID+" is ?", new String[]{actId});
+        closeDB();
+    }
+
+    public void addActionItem(ContentValues values) {
+        db.insert(TABLE_NAME, null, values);
+        closeDB();
     }
 }

@@ -34,5 +34,12 @@
     <color name="divider_gray">@color/text_color_gray</color>
     <color name="theme_main_color_press">#019370</color>
     <color name="light_black">#10000000</color>
+    <color name="bg_color_green">#50d2c2</color>
+    <color name="bg_color_purple">#ea97fb</color>
+    <color name="bg_color_orange">#fcab53</color>
+    <color name="bg_color_yellow_light">#eff149</color>
+    <color name="bg_color_pink">#fbddf0</color>
+    <color name="bg_color_purple_black">#8c88ff</color>
+    <color name="bg_color_green_light">#26e1f4</color>
 
 </resources>
